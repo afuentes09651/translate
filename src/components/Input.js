@@ -8,12 +8,13 @@ function Input(){
 
   const [input, setInput] = useState('');
   const [result, setResult] = useState('testing');
-  const [langOut,setLangOut] = useState('es');
+  const [langTo,setLangTo] = useState('');
 
   async function execTrans(e) {
     e.preventDefault();
-    const en = input; //english by default for now
-    const translation = await translate(en, 'fr');
+    console.log(e.target.langTo.value);
+    const langTo = e.target.langTo.value;
+    const translation = await translate(input, {to: langTo});
     console.log('translated!', translation); //for debbugging
     setResult(translation);
   }
@@ -27,8 +28,8 @@ return(
 <>
 <form
   onSubmit={execTrans}>
-  <label htmlFor='selectLangOut'>Select Language Output</label>
-  <select id='selectLangOut'>
+  <label htmlFor='langTo'>Select Language Output</label>
+  <select id='langTo'>
     <option value='es' defaultValue>Spanish</option>
     <option value='fr'>French</option>
     <option value='de'>German</option>
