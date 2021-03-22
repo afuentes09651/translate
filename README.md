@@ -1,3 +1,7 @@
+# Credits
+
+This project is made possible with help of @franciscop and his npm bundle/api: [translate](https://github.com/franciscop/translate#readme)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
