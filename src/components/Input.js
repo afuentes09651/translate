@@ -8,33 +8,48 @@ function Input(){
 
   const [input, setInput] = useState('');
   const [result, setResult] = useState('testing');
-  const [langTo,setLangTo] = useState('');
 
   async function execTrans(e) {
-    e.preventDefault();
-    console.log(e.target.langTo.value);
+    e.preventDefault(); //we dont want to refresh
+    console.log('Translated to: ',e.target.langTo.value); //debugging
+    console.log('Translated from: ', e.target.langFrom.value);
+    console.log('Text: ', input);
+
+    //lets get our language info so we know how to translate the
     const langTo = e.target.langTo.value;
-    const translation = await translate(input, {to: langTo});
+    const LangFrom = e.target.langFrom.value;
+
+    const translation = await translate(input, {to: langTo, from: langFrom});
     console.log('translated!', translation); //for debbugging
     setResult(translation);
   }
 
   function handleChange(e){
     setInput(e.target.value);
-    console.log(input); //debugging
   }
 
 return(
 <>
 <form
   onSubmit={execTrans}>
-  <label htmlFor='langTo'>Select Language Output</label>
+  <label htmlFor='langTo'>Select Language Output: </label>
+
   <select id='langTo'>
     <option value='es' defaultValue>Spanish</option>
+    <option value='en' >English</option>
     <option value='fr'>French</option>
     <option value='de'>German</option>
     <option value='ja'>Japanese</option>
   </select>
+
+  <select id='langFrom'>
+    <option value='en' defaultValue>English</option>
+    <option value='es'>Spanish</option>
+    <option value='fr'>French</option>
+    <option value='de'>German</option>
+    <option value='ja'>Japanese</option>
+  </select>
+
   <label htmlFor='userInput'>Enter here:</label>
     <textarea
       rows='4'
@@ -47,7 +62,8 @@ return(
     <input type='submit' value='submit'/>
 </form>
 
-  <p>{result}</p>
+<label htmlFor='output'>Output: </label>
+  <p id='output'>{result}</p>
 </>
 );
 
