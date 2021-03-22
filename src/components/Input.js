@@ -1,26 +1,26 @@
-import React, {useState} from 'react';
-import translate from "translate";
+import translate from "translate"; //courtesy of franciscop on GitHub!
 
-translate.engine = 'libre';
+translate.engine = 'libre'; //we really dont want to deal with keys in this
 
 
 function Input(){
 
+  //some states to handle input and output
   const [input, setInput] = useState('');
-  const [result, setResult] = useState('testing');
+  const [result, setResult] = useState('');
 
   async function execTrans(e) {
     e.preventDefault(); //we dont want to refresh
     console.log('Translated to: ',e.target.langTo.value); //debugging
     console.log('Translated from: ', e.target.langFrom.value);
-    console.log('Text: ', input);
+    console.log('Original text: ', input);
 
     //lets get our language info so we know how to translate the
     const langTo = e.target.langTo.value;
     const LangFrom = e.target.langFrom.value;
 
     const translation = await translate(input, {to: langTo, from: langFrom});
-    console.log('translated!', translation); //for debbugging
+    console.log('Tranlsation: ', translation); //for debbugging
     setResult(translation);
   }
 
@@ -34,6 +34,7 @@ return(
   onSubmit={execTrans}>
   <label htmlFor='langTo'>Select Language Output: </label>
 
+  {/* More language support to come! */}
   <select id='langTo'>
     <option value='es' defaultValue>Spanish</option>
     <option value='en' >English</option>
@@ -62,7 +63,7 @@ return(
     <input type='submit' value='submit'/>
 </form>
 
-<label htmlFor='output'>Output: </label>
+<label htmlFor='output'>Translation: </label>
   <p id='output'>{result}</p>
 </>
 );
