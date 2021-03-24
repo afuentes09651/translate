@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import translate from "translate"; //courtesy of franciscop on GitHub!
 
 translate.engine = 'libre'; //we really dont want to deal with keys in this
@@ -17,7 +18,7 @@ function Input(){
 
     //lets get our language info so we know how to translate the
     const langTo = e.target.langTo.value;
-    const LangFrom = e.target.langFrom.value;
+    const langFrom = e.target.langFrom.value;
 
     const translation = await translate(input, {to: langTo, from: langFrom});
     console.log('Tranlsation: ', translation); //for debbugging
